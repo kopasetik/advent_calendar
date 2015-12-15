@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app="adventApp">
+<head>
+  <style type="text/css">
+
+  </style>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="month_box">
+    <div class="calendar">
+      <div class="box_holder" ng-controller="CalendarCtrl" masonry>
+        <div class="day_box masonry-brick"
+          ng-class="{expanded: day.showNumber}"
+          ng-repeat="day in daysOfAdvent track by $index"
+          ng-click="toggleDay($index)">
+          <span ng-if="day.showNumber">{{$index+1}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="http://passy.github.io/angular-masonry/angular-masonry.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
