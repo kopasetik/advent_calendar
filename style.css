@@ -14,7 +14,7 @@ body {
 }
 
 .calendar {
-    display: flex;
+    /* display: flex; */
     width: 95%;
     height: 95%;
     background-color: crimson;
@@ -50,7 +50,7 @@ body {
     flex-wrap: wrap;
     margin-left: auto;
     width: 95%;
-    height: 95%;
+    height: 47%;
 }
 
 .day_box.expanded {
