@@ -7,10 +7,10 @@ var router = express.Router();
 router.route('/')
   .get(function getApiList(req, res) {
     console.log('get list of APIs');
-    res.send({
-      success: 'true',
-      method: 'GET'
-    })
+    Api.find(function sendApis(err, apis){
+      if(err) return res.status(500).send(err);
+      res.send(apis);
+    });
   })
   .post(function postOneApi(req, res){
     console.log('post one API');
