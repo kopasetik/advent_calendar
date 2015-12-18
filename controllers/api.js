@@ -14,9 +14,9 @@ router.route('/')
   })
   .post(function postOneApi(req, res){
     console.log('post one API');
-    res.send({
-      success: 'true',
-      method: 'POST'
+    Api.create(req.body, function sendSavedApi(err, api){
+      if(err) return res.status(500).send(err);
+      res.send(api);
     });
   })
 
