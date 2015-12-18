@@ -30,7 +30,7 @@ router.route('/:id')
   })
   .put(function putOneApi(req, res){
     console.log('put/update one API - ID #' + req.params.id);
-    Api.findOneAndUpdate({_id: req.params.id}, req.body, function updateApi(err) {
+    Api.findOneAndUpdate({_id: req.params.id}, req.body, function confirmApiUpdate(err) {
       if(err) return res.status(500).send(err);
       res.send({
         success: 'true',
@@ -40,9 +40,12 @@ router.route('/:id')
   })
   .delete(function deleteOneApi(req, res){
     console.log('delete one API - ID #' + req.params.id);
-    res.send({
-      success: 'true',
-      method: 'DELETE'
+    Api.findOneAndRemove({_id: req.params.id}, function confirmApiRemoval(err){
+      if(err) return res.status(500).send(err);
+      res.send({
+        success: 'true',
+        method: 'DELETE'
+      });
     });
   })
 
