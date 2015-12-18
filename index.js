@@ -1,10 +1,18 @@
 var
   express = require('express'),
-  mongoose = require('mongoose');
+  bodyParser = require('body-parser'),
+  path = require('path');
 
 var app = express();
 
+var
+  mongoose = require('mongoose'),
+  Api = require('./models/api');
+mongoose.connect('mongodb://localhost/advent');
+
 app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/api/apilibrary', require('./controllers/api'));
 
