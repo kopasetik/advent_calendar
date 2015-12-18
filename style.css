@@ -33,6 +33,8 @@ body {
     box-sizing: border-box;
     margin: 1% 1%;
     transition: scale(1.5);
+    justify-content: center;
+    align-items: center;
 }
 
 .month_box {
@@ -58,4 +60,13 @@ body {
   height: 50%;
   max-width: 50%;
   max-height: 50%;
+}
+
+.box_holder .date_details {
+    height: 95%;
+    width: 95%;
+    background-color: cyan;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

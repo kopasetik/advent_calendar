@@ -11,14 +11,21 @@
     <div class="calendar" ng-controller="CalendarCtrl">
       <div class="box_holder">
           <div class="day_box masonry-brick"
-            ng-class="{expanded: day.showNumber}"
-            ng-repeat="day in daysOfAdvent track by $index"
+            ng-repeat="api in apiList track by $index"
             ng-click="toggleDay($index)">
-            <span ng-if="day.showNumber">{{$index+1}}</span>
+            <span ng-if="$index + 1 == selectedDay">{{$index+1}}</span>
           </div>
       </div>
       <div class="box_holder">
         <div class="date_details">
+          <span class="date_text" ng-if="selectedDay !== null">
+            Day: {{selectedDay}}<br>
+            API: {{apiList[selectedDay-1]['api']}}<br>
+            Description: {{apiList[selectedDay-1]['description']}}<br>
+            URL: <a href ="{{apiList[selectedDay-1]['url']}}">
+              {{apiList[selectedDay-1]['url']}}
+            </a>
+          </span>
         </div>
       </div>
     </div>
