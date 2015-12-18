@@ -30,9 +30,12 @@ router.route('/:id')
   })
   .put(function putOneApi(req, res){
     console.log('put/update one API - ID #' + req.params.id);
-    res.send({
-      success: 'true',
-      method: 'PUT'
+    Api.findOneAndUpdate({_id: req.params.id}, req.body, function updateApi(err) {
+      if(err) return res.status(500).send(err);
+      res.send({
+        success: 'true',
+        method: 'PUT'
+      });
     });
   })
   .delete(function deleteOneApi(req, res){
