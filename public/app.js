@@ -1,7 +1,22 @@
-angular.module('adventApp', [])
-  .controller('CalendarCtrl', ['$scope', loadCalendar])
+angular.module('adventApp', ['ui.bootstrap'])
+  .controller('CalendarCtrl', ['$scope', '$uibModal', loadCalendar])
+  .controller('SearchModalCtrl', ['$scope', '$uibModalInstance', manageModal])
 
-function loadCalendar ($scope) {
+function updateModalStatus(){
+
+}
+
+function manageModal($scope, $uibModalInstance){
+  $scope.ok = function (){
+    $uibModalInstance.close($scope.searchInput);
+  };
+
+  $scope.cancel = function (){
+    $uibModalInstance.dismiss('it canceled');
+  };
+}
+
+function loadCalendar ($scope, $uibModal) {
   $scope.apiList = [
       {
         api: 'Meetup',
@@ -83,4 +98,26 @@ function loadCalendar ($scope) {
     specificDay['showNumber'] = !specificDay['showNumber'];
     $scope.selectedDay = idx + 1;
   };
+  $scope.open = (function(){
+    var modalOpened = false;
+    return function(){
+      if (!modalOpened){
+        var modalInstance = $uibModal.open({
+          templateUrl: 'myModalContent.html',
+          controller: 'SearchModalCtrl',
+          windowClass: 'active_modal another_class yet_another_class'
+        });
+
+        modalInstance.result.then(function resolve(){
+          console.log('It\'s ok\'d!');
+          modalOpened = false;
+        }, function reject(){
+          console.log('It\'s dismissed');
+          modalOpened = false;
+        });
+
+        modalOpened = true;
+      }
+    };
+  })();
 }

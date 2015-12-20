@@ -70,3 +70,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/* Figuring out how to center the modal... */
+.active_modal {
+  position: fixed;
+  left: 40%;
+  top: 40%;
+  background-color: purple;
+}

@@ -7,13 +7,29 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <script type="text/ng-template" id="myModalContent.html">
+      <div class="modal-header">
+          <h3 class="modal-title">It&#39;s a modal!</h3>
+      </div>
+      <div class="modal-body">
+          <input type="search" ng-model="searchInput" />
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+          <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+      </div>
+  </script>
   <div class="month_box">
     <div class="calendar" ng-controller="CalendarCtrl">
       <div class="box_holder">
-          <div class="day_box masonry-brick"
+          <div class="day_box"
             ng-repeat="api in apiList track by $index"
             ng-click="toggleDay($index)">
             <span ng-if="$index + 1 == selectedDay">{{$index+1}}</span>
+          </div>
+          <div class="day_box"
+            ng-click="open()">
+            <span>+</span>
           </div>
       </div>
       <div class="box_holder">
@@ -30,7 +46,8 @@
       </div>
     </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="./angular.js"></script>
+  <script src="./ui-bootstrap-tpls.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>
