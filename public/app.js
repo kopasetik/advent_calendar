@@ -1,9 +1,6 @@
-angular.module('adventApp', ['ui.bootstrap', 'ngResource'])
-  .controller('CalendarCtrl', ['$scope', '$uibModal', loadCalendar])
+angular.module('adventApp', ['ui.bootstrap'])
+  .controller('CalendarCtrl', ['$scope', '$uibModal', '$http', loadCalendar])
   .controller('SearchModalCtrl', ['$scope', '$uibModalInstance', manageModal])
-  .factory('Api', ['$resource', function ($resource) {
-    return $resource('http://apis.io/api/search')
-  }])
 
 function updateModalStatus(){
 
@@ -19,7 +16,7 @@ function manageModal($scope, $uibModalInstance){
   };
 }
 
-function loadCalendar ($scope, $uibModal) {
+function loadCalendar ($scope, $uibModal, $http) {
   $scope.apiList = [
       {
         api: 'Meetup',
@@ -113,6 +110,19 @@ function loadCalendar ($scope, $uibModal) {
 
         modalInstance.result.then(function resolve(searchInput){
           console.log(searchInput);
+          $http({
+            method: 'GET',
+            url: 'http://apis.io/api/search',
+            params: {
+              q: searchInput
+            }
+          })
+          .then(function queryResolve(response){
+            console.log(response.data.data);
+          }, function queryReject(error){
+            // console.log(error);
+            console.log('it didnt work')
+          });
           modalOpened = false;
         }, function reject(rejectionReason){
           console.log(rejectionReason);
