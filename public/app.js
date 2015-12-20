@@ -1,6 +1,9 @@
-angular.module('adventApp', ['ui.bootstrap'])
+angular.module('adventApp', ['ui.bootstrap', 'ngResource'])
   .controller('CalendarCtrl', ['$scope', '$uibModal', loadCalendar])
   .controller('SearchModalCtrl', ['$scope', '$uibModalInstance', manageModal])
+  .factory('Api', ['$resource', function ($resource) {
+    return $resource('http://apis.io/api/search')
+  }])
 
 function updateModalStatus(){
 
@@ -12,7 +15,7 @@ function manageModal($scope, $uibModalInstance){
   };
 
   $scope.cancel = function (){
-    $uibModalInstance.dismiss('it canceled');
+    $uibModalInstance.dismiss('modal canceled');
   };
 }
 
@@ -108,11 +111,11 @@ function loadCalendar ($scope, $uibModal) {
           windowClass: 'active_modal another_class yet_another_class'
         });
 
-        modalInstance.result.then(function resolve(){
-          console.log('It\'s ok\'d!');
+        modalInstance.result.then(function resolve(searchInput){
+          console.log(searchInput);
           modalOpened = false;
-        }, function reject(){
-          console.log('It\'s dismissed');
+        }, function reject(rejectionReason){
+          console.log(rejectionReason);
           modalOpened = false;
         });
 
