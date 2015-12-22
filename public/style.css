@@ -73,12 +73,9 @@ body {
     box-sizing: border-box;
 }
 
-/* Figuring out how to center the modal... */
-.active_modal {
-  position: fixed;
-  left: 40%;
-  top: 40%;
-  background-color: purple;
+.modal-dialog {
+    width: 33%;
+    margin: 0 auto;
 }
 
 .searchResult {

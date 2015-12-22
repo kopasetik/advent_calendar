@@ -1,9 +1,7 @@
 <!doctype html>
 <html ng-app="adventApp">
 <head>
-  <style type="text/css">
-
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -50,12 +48,15 @@
             </a>
           </span> -->
           <span class="date_text" ng-if="selectedDay !== null">
-            <span ng-if="activeList === apiList">Day: {{selectedDay}}<br></span>
-            API: {{activeList[selectedDay-1]['name']}}<br>
-            Description: {{activeList[selectedDay-1]['description']}}<br>
-            URL: <a href ="{{activeList[selectedDay-1]['humanURL']}}">
-              {{activeList[selectedDay-1]['humanURL']}}
-            </a>
+            <!-- <form action="/api/apilibrary/" method="post"> -->
+              <span ng-if="activeList === apiList">Day: {{selectedDay}}<br></span>
+              API: {{activeList[selectedDay-1]['name']}}<br>
+              Description: {{activeList[selectedDay-1]['description']}}<br>
+              URL: <a href ="{{activeList[selectedDay-1]['humanURL']}}">
+                {{activeList[selectedDay-1]['humanURL']}}
+              </a><br>
+              <button class="btn btn-primary" ng-click="addApiToFaves()">Add to Favorites</button>
+            <!-- </form> -->
           </span>
         </div>
       </div>

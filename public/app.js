@@ -100,6 +100,27 @@ function loadCalendar ($scope, $uibModal, $http) {
     specificDay['showNumber'] = !specificDay['showNumber'];
     $scope.selectedDay = idx + 1;
   };
+  prepareApiForFaves = function(){
+    var api = $scope.activeList[$scope.selectedDay-1];
+    return {
+      name: api.name,
+      description: api.description,
+      url: api.humanURL
+    };
+  }
+  $scope.addApiToFaves = function(){
+    $http({
+      method: 'POST',
+      url: '/api/apilibrary',
+      data: prepareApiForFaves()
+    })
+    .then(function postResolve(response){
+        console.log('Api saved to favorites!');
+    }, function postReject(error){
+      console.log('It didn\'t work:',error);
+    });
+  }
+
   $scope.open = (function(){
     var modalOpened = false;
     return function(){
@@ -107,8 +128,8 @@ function loadCalendar ($scope, $uibModal, $http) {
         var modalInstance = $uibModal.open({
           templateUrl: 'myModalContent.html',
           controller: 'SearchModalCtrl',
-          windowClass: 'active_modal another_class yet_another_class',
-          size: 'lg'
+          windowClass: '',
+          size: 'sm'
         });
 
         modalInstance.result.then(function resolve(searchInput){
