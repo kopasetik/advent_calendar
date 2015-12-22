@@ -69,6 +69,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 5%;
+    box-sizing: border-box;
 }
 
 /* Figuring out how to center the modal... */
@@ -77,4 +79,17 @@ body {
   left: 40%;
   top: 40%;
   background-color: purple;
+}
+
+.searchResult {
+  background-color: chartreuse;
+}
+
+.add_api_box {
+  font-weight: bolder;
+  background-color: gold;
+}
+
+.date_text {
+  word-break: break-word;
 }

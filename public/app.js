@@ -19,82 +19,84 @@ function manageModal($scope, $uibModalInstance){
 function loadCalendar ($scope, $uibModal, $http) {
   $scope.apiList = [
       {
-        api: 'Meetup',
+        name: 'Meetup',
         description: 'Extend your community',
-        url: 'https://api.meetup.com',
+        humanURL: 'https://api.meetup.com',
         showNumber: false
       },
       {
-        api: 'Youtube',
+        name: 'Youtube',
         description: 'Video',
-        url: 'https://developers.google.com/youtube/v3/docs/',
+        humanURL: 'https://developers.google.com/youtube/v3/docs/',
         showNumber: false
       },
       {
-        api: 'Google Maps',
+        name: 'Google Maps',
         description: 'Mapping',
-        url: 'https://developers.google.com/maps/',
+        humanURL: 'https://developers.google.com/maps/',
         showNumber: false
       },
       {
-        api: 'Twilio',
+        name: 'Twilio',
         description: 'Phone',
-        url: 'https://www.twilio.com/api',
+        humanURL: 'https://www.twilio.com/api',
         showNumber: false
       },
       {
-        api: 'GitHub',
+        name: 'GitHub',
         description: 'Version Control',
-        url: 'https://developer.github.com/v3/',
+        humanURL: 'https://developer.github.com/v3/',
         showNumber: false
       },
       {
-        api: 'Braintree',
+        name: 'Braintree',
         description: 'Payments',
-        url: 'https://developers.braintreepayments.com/',
+        humanURL: 'https://developers.braintreepayments.com/',
         showNumber: false
       },
       {
-        api: 'Amazon Product Advertising',
+        name: 'Amazon Product Advertising',
         description: 'Affiliate Marketing',
-        url: 'https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html',
+        humanURL: 'https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html',
         showNumber: false
       },
       {
-        api: 'SendGrid',
+        name: 'SendGrid',
         description: 'Email',
-        url: 'https://sendgrid.com/docs/Integrate/libraries.html',
+        humanURL: 'https://sendgrid.com/docs/Integrate/libraries.html',
         showNumber: false
       },
       {
-        api: 'Sabre',
+        name: 'Sabre',
         description: 'Travel',
-        url: 'https://developer.sabre.com',
+        humanURL: 'https://developer.sabre.com',
         showNumber: false
       },
       {
-        api: 'Dropbox',
+        name: 'Dropbox',
         description: 'File storage',
-        url: 'https://www.dropbox.com/developers',
+        humanURL: 'https://www.dropbox.com/developers',
         showNumber: false
       },
       {
-        api: 'FitBit',
+        name: 'FitBit',
         description: 'Fitness',
-        url: 'https://dev.fitbit.com/',
+        humanURL: 'https://dev.fitbit.com/',
         showNumber: false
       },
       {
-        api: 'Twitter',
+        name: 'Twitter',
         description: 'Microblogging',
-        url: 'https://dev.twitter.com/overview/documentation',
+        humanURL: 'https://dev.twitter.com/overview/documentation',
         showNumber: false
       }
     ]
   $scope.daysOfAdvent = [];
   $scope.selectedDay = null;
-  $scope.toggleDay = function (idx){
-    var specificDay = $scope.apiList[idx];
+  $scope.activeList = '';
+  $scope.toggleDay = function (listToUse, idx){
+    $scope.activeList = $scope[listToUse];
+    var specificDay = $scope.activeList[idx];
     specificDay['showNumber'] = !specificDay['showNumber'];
     $scope.selectedDay = idx + 1;
   };
@@ -105,11 +107,11 @@ function loadCalendar ($scope, $uibModal, $http) {
         var modalInstance = $uibModal.open({
           templateUrl: 'myModalContent.html',
           controller: 'SearchModalCtrl',
-          windowClass: 'active_modal another_class yet_another_class'
+          windowClass: 'active_modal another_class yet_another_class',
+          size: 'lg'
         });
 
         modalInstance.result.then(function resolve(searchInput){
-          console.log(searchInput);
           $http({
             method: 'GET',
             url: 'http://apis.io/api/search',
@@ -118,9 +120,8 @@ function loadCalendar ($scope, $uibModal, $http) {
             }
           })
           .then(function queryResolve(response){
-            console.log(response.data.data);
+            $scope.searchResults = response.data.data;
           }, function queryReject(error){
-            // console.log(error);
             console.log('it didnt work')
           });
           modalOpened = false;
@@ -128,7 +129,6 @@ function loadCalendar ($scope, $uibModal, $http) {
           console.log(rejectionReason);
           modalOpened = false;
         });
-
         modalOpened = true;
       }
     };
