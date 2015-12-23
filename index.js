@@ -14,6 +14,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+app.use('/api/users', require('./controllers/user'));
 app.use('/api/apilibrary', require('./controllers/api'));
 
 app.listen(3000, function(){

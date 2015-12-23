@@ -7,4 +7,4 @@ var ApiSchema = new Schema({
   url: String
 });
 
-module.exports = mongoose.model('Api', ApiSchema)
+module.exports = mongoose.model('Api', ApiSchema);
