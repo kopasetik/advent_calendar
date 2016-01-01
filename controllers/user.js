@@ -25,6 +25,7 @@ router.route('/login')
   .post(function updateUser(req, res){
     User.findOne({email: req.body.email}, function checkUser(err, doc){
       if(err) return res.status(500).send(err);
+      if(doc === null) return res.status(401).send({message: 'no such user'});
       bcrypt.compare(req.body.password, doc.password, function checkHashedPassword(err, result) {
         if(err) return res.status(500).send(err);
         if(!result) return res.send({message: 'wrong password'});
