@@ -1,6 +1,8 @@
 angular.module('adventApp', ['ui.bootstrap'])
   .controller('CalendarCtrl', ['$scope', '$uibModal', '$http', loadCalendar])
   .controller('SearchModalCtrl', ['$scope', '$uibModalInstance', manageModal])
+  .controller('LoginCtrl', ['$scope', '$http', prepareLogin])
+  .controller('LogoutCtrl', ['$scope', '$http', prepareLogout])
 
 function updateModalStatus(){
 
@@ -13,6 +15,32 @@ function manageModal($scope, $uibModalInstance){
 
   $scope.cancel = function (){
     $uibModalInstance.dismiss('modal canceled');
+  };
+}
+
+function prepareLogin($scope, $http){
+  $scope.user = {
+    email: '',
+    password: ''
+  };
+  $scope.logMeIn = function(userData){
+    $http.post('/api/users/login', userData)
+    .then(function logInResolve(response){
+      console.log(response.data);
+    }, function logInReject(error){
+      console.log('Login denied!')
+    });
+  };
+}
+
+function prepareLogout($scope, $http){
+  $scope.logMeOut = function(){
+    $http.get('/api/users/logout')
+    .then(function logOutResolve(response){
+      console.log(response.data);
+    }, function logOutReject(error){
+      console.log('Logout failed!')
+    });
   };
 }
 
@@ -111,16 +139,17 @@ function loadCalendar ($scope, $uibModal, $http) {
   $scope.addApiToFaves = function(){
     $http({
       method: 'POST',
-      url: '/api/apilibrary',
+      url: '/api/users/addfavorite',
       data: prepareApiForFaves()
+      // url: '/api/apilibrary',
+      // data: prepareApiForFaves()
     })
     .then(function postResolve(response){
-        console.log('Api saved to favorites!');
+      console.log(response.data);
     }, function postReject(error){
-      console.log('It didn\'t work:',error);
+      console.log('It didn\'t work:', error);
     });
   }
-
   $scope.open = (function(){
     var modalOpened = false;
     return function(){

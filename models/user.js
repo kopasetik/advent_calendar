@@ -5,7 +5,11 @@ var UserSchema = new Schema({
   name: String,
   password: String,
   email: String,
-  favorites: [String]
+  favorites: [{
+    name: String,
+    description: String,
+    url: String
+  }]
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,6 +1,7 @@
 var
   express = require('express'),
   bodyParser = require('body-parser'),
+  session = require('express-session'),
   path = require('path');
 
 var app = express();
@@ -13,6 +14,11 @@ mongoose.connect('mongodb://localhost/advent');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({
+  secret: 'it is quite secret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/api/users', require('./controllers/user'));
 app.use('/api/apilibrary', require('./controllers/api'));
