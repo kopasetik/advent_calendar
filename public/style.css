@@ -78,6 +78,11 @@ body {
     margin: 0 auto;
 }
 
+.modal-content > * {
+    display: flex;
+    justify-content: center;
+}
+
 .searchResult {
   background-color: chartreuse;
 }
