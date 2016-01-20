@@ -1,8 +1,9 @@
-angular.module('adventApp', ['ui.bootstrap'])
+angular.module('adventApp', ['ui.bootstrap', 'ngRoute'])
   .controller('CalendarCtrl', ['$scope', '$uibModal', '$http', loadCalendar])
   .controller('SearchModalCtrl', ['$scope', '$uibModalInstance', manageModal])
   .controller('LoginCtrl', ['$scope', '$http', prepareLogin])
   .controller('LogoutCtrl', ['$scope', '$http', prepareLogout])
+ .config(['$routeProvider', '$locationProvider', setRoutes])
 
 function updateModalStatus(){
 
@@ -183,4 +184,31 @@ function loadCalendar ($scope, $uibModal, $http) {
       }
     };
   })();
+}
+
+// function for routing
+
+function setRoutes ($routeProvider, $locationProvider){
+  $routeProvider
+  .when('/', {
+    templateUrl: 'home.html',
+    controller: 'CalendarCtrl'
+  })
+  .when('/login', {
+    templateUrl: 'login.html',
+    controller: 'LoginCtrl'
+  })
+  .when('/logout', {
+    templateUrl: 'logout.html',
+    controller: 'LogoutCtrl'
+  })
+  // .when('/signup', {
+  //   templateUrl: 'signup.html',
+  //   controller: ''
+  // })
+  .otherwise({
+    templateUrl: '404.html'
+  })
+
+  $locationProvider.html5Mode(false).hashPrefix('!')
 }

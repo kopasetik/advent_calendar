@@ -3,68 +3,12 @@
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
-  <script type="text/ng-template" id="myModalContent.html">
-      <div class="modal-header">
-          <h3 class="modal-title">Search for an API</h3>
-      </div>
-      <div class="modal-body">
-          <input type="search" ng-model="searchInput" />
-      </div>
-      <div class="modal-footer">
-          <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-          <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-      </div>
-  </script>
-  <div class="month_box">
-    <div class="calendar" ng-controller="CalendarCtrl">
-      <div class="box_holder">
-          <div class="day_box"
-            ng-repeat="api in apiList track by $index"
-            ng-click="toggleDay('apiList', $index)">
-            <span ng-if="$index + 1 === selectedDay && activeList === apiList">
-              {{$index+1}}
-            </span>
-          </div>
-          <div class="day_box add_api_box"
-            ng-click="open()">
-            +
-          </div>
-          <div class="day_box searchResult"
-            ng-repeat="result in searchResults"
-            ng-click="toggleDay('searchResults', $index)">
-
-          </div>
-      </div>
-      <div class="box_holder">
-        <div class="date_details">
-          <!-- <span class="date_text" ng-if="selectedDay !== null">
-            Day: {{selectedDay}}<br>
-            API: {{apiList[selectedDay-1]['api']}}<br>
-            Description: {{apiList[selectedDay-1]['description']}}<br>
-            URL: <a href ="{{apiList[selectedDay-1]['url']}}">
-              {{apiList[selectedDay-1]['url']}}
-            </a>
-          </span> -->
-          <span class="date_text" ng-if="selectedDay !== null">
-            <!-- <form action="/api/apilibrary/" method="post"> -->
-              <span ng-if="activeList === apiList">Day: {{selectedDay}}<br></span>
-              API: {{activeList[selectedDay-1]['name']}}<br>
-              Description: {{activeList[selectedDay-1]['description']}}<br>
-              URL: <a href ="{{activeList[selectedDay-1]['humanURL']}}">
-                {{activeList[selectedDay-1]['humanURL']}}
-              </a><br>
-              <button class="btn btn-primary" ng-click="addApiToFaves()">Add to Favorites</button>
-            <!-- </form> -->
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
   <script src="./angular.js"></script>
   <script src="./ui-bootstrap-tpls.js"></script>
   <script src="./angular-route.js"></script>
   <script src="./app.js"></script>
+</head>
+<body>
+    <ng-view></ng-view>
 </body>
 </html>
