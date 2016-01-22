@@ -11,11 +11,21 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 ng-view {
   height: 100%;
   width: 100%;
+}
+
+body div.ng-isolate-scope {
+  width: 100%;
+}
+
+ul.nav.nav-tabs {
+  display: flex;
+  justify-content: space-between;
 }
 
 .calendar {

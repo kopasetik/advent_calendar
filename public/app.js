@@ -1,4 +1,5 @@
 angular.module('adventApp', ['ui.bootstrap', 'ngRoute'])
+  .controller('MainCtrl', ['$scope', '$uibModal', '$http', '$window', loadMain])
   .controller('CalendarCtrl', ['$scope', '$uibModal', '$http', loadCalendar])
   .controller('SearchModalCtrl', ['$scope', '$uibModalInstance', manageModal])
   .controller('LoginCtrl', ['$scope', '$http', prepareLogin])
@@ -43,6 +44,12 @@ function prepareLogout($scope, $http){
       console.log('Logout failed!')
     });
   };
+}
+
+function loadMain ($scope, $uibModal, $http, $window){
+  $scope.changeWindow = function(url){
+    $window.location = url
+  }
 }
 
 function loadCalendar ($scope, $uibModal, $http) {

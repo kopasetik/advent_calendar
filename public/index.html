@@ -8,7 +8,21 @@
   <script src="./angular-route.js"></script>
   <script src="./app.js"></script>
 </head>
-<body>
+<body ng-controller="MainCtrl">
+  <!-- <nav role="navigation">
+    <ul class="nav nav-pills nav-justified">
+      <li role="presentation" class="active"><a href="/#!/">Home</a></li>
+      <li role="presentation"><a href="/#!/favorites">Favorites</a></li>
+      <li role="presentation"><a href="/#!/login">Login</a></li>
+      <li role="presentation"><a href="/#!/logout">Logout</a></li>
+    </ul>
+  </nav> -->
+  <uib-tabset>
+    <uib-tab heading="Home" ng-click="changeWindow('/#!/')"></uib-tab>
+    <uib-tab heading="Favorites" ng-click="changeWindow('/#!/favorites')"></uib-tab>
+    <uib-tab heading="Login" ng-click="changeWindow('/#!/login')"></uib-tab>
+    <uib-tab heading="Logout" ng-click="changeWindow('/#!/logout')"></uib-tab>
+  </uib-tabset>
     <ng-view></ng-view>
 </body>
 </html>
