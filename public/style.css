@@ -83,9 +83,9 @@ ul.nav.nav-tabs {
     background-color: cyan;
     display: flex;
     justify-content: center;
-    align-items: center;
     padding: 5%;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 .modal-dialog {

@@ -54,10 +54,20 @@ router.route('/addfavorite')
     });
   })
 
+router.route('/favorites')
+  .get(function findFaves(req, res){
+    var body = req.body;
+    if(!req.session.isLoggedIn) return res.send({message: 'not logged in'});
+    User.findOne({email: req.session.email}, function fetchFaves(err, data){
+      if(err) return res.status(500).send(err);
+      res.send({favorites: doc.favorites});
+    })
+  })
+
 router.route('/logout')
   .all(function logoutUser(req, res){
     req.session.destroy(function(){
-      res.send({message: 'user logged out. session deleted.'})
+      res.send({message: 'user logged out. session deleted.'});
     })
   })
 
