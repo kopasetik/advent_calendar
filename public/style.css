@@ -68,6 +68,8 @@ ul.nav.nav-tabs {
     margin-left: auto;
     width: 95%;
     height: 47%;
+    overflow-y: scroll;
+    padding-top: 5%;
 }
 
 .day_box.expanded {
@@ -91,6 +93,14 @@ ul.nav.nav-tabs {
 .modal-dialog {
     width: 33%;
     margin: 0 auto;
+}
+
+.modal-content {
+  width: 15em;
+}
+
+.modal-title {
+  text-align: center;
 }
 
 .modal-content > * {
