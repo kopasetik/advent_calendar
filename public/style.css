@@ -32,14 +32,14 @@ ul.nav.nav-tabs {
     /* display: flex; */
     width: 95%;
     height: 95%;
-    background-color: crimson;
+    background-color: #D46A6A;
     box-sizing: border-box;
     justify-content: center;
     text-align: center;
 }
 
 .day_box {
-    background-color: green;
+    background-color: #2D882D;
     min-height: 50px;
     min-width: 50px;
     max-height: 10%;
@@ -82,7 +82,7 @@ ul.nav.nav-tabs {
 .box_holder .date_details {
     height: 95%;
     width: 95%;
-    background-color: cyan;
+    background-color: #FFD1AA;
     display: flex;
     justify-content: center;
     padding: 5%;
